@@ -14,21 +14,22 @@ function preload()
 function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
-
-	var options = {
-     isStatic:true
-	}
 	
+	var options={
+		setStatic: true,
+		restitution: 0.3
+	}
 	packageSprite=createSprite(width/2, 80, 10,10,options);
-	packageSprite.addImage(packageIMG)
-	packageSprite.scale=0.2
+	packageSprite.addImage(packageIMG);
+	packageSprite.scale=0.2;
+	console.log(packageSprite);
 
 	helicopterSprite=createSprite(width/2, 200, 10,10);
-	helicopterSprite.addImage(helicopterIMG)
-	helicopterSprite.scale=0.6
+	helicopterSprite.addImage(helicopterIMG);
+	helicopterSprite.scale=0.6;
 
 	groundSprite=createSprite(width/2, height-35, width,10);
-	groundSprite.shapeColor=color(255)
+	groundSprite.shapeColor=color(255);
 
 	engine = Engine.create();
 	world = engine.world;
@@ -39,7 +40,6 @@ function setup() {
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 
-
 	Engine.run(engine);
     keyPressed();
 }
@@ -47,12 +47,9 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(0);
-  packageSprite.x= packageBody.position.x 
-  packageSprite.y= packageBody.position.y 
-
-  push();
-  translate(packageSprite.x,packageSprite.y);
-  pop();
+  packageSprite.x= packageBody.position.x ;
+  packageSprite.y= packageBody.position.y ;
+  packageSprite.velocityY=packageSprite.velocityY+1.5;
   drawSprites();
  
 }
@@ -62,7 +59,6 @@ function keyPressed() {
 	packageSprite.x=packageBody.position.x;
 	packageSprite.y=packageBody.position.y;
 	Matter.Body.setStatic(packageBody,false);
-	
   }
 }
 
